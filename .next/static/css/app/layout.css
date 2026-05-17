@@ -1269,6 +1269,9 @@ video {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
+.text-current {
+  color: currentColor;
+}
 .text-foreground {
   --tw-text-opacity: 1;
   color: rgb(237 237 237 / var(--tw-text-opacity, 1));

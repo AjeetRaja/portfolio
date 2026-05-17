@@ -2,8 +2,41 @@
 
 import { motion } from "framer-motion";
 import { Send, Mail, MapPin, Phone } from "lucide-react";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
+  const [isSending, setIsSending] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSending(true);
+
+    const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "";
+    const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "";
+    const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "";
+
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      alert("EmailJS is not configured properly in .env.local");
+      setIsSending(false);
+      return;
+    }
+
+    try {
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target as HTMLFormElement, PUBLIC_KEY);
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+      alert("Message sent successfully!");
+    } catch (error) {
+      console.error("EmailJS send error:", error);
+      alert("An error occurred while sending your message. Please try again later.");
+    } finally {
+      setIsSending(false);
+    }
+  };
+
   return (
     <section id="contact" className="w-full py-16 bg-[#000000]">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -71,12 +104,13 @@ export default function Contact() {
               {/* Background Glow */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 blur-[100px] -z-10" />
               
-              <form className="space-y-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-xs font-bold text-neutral-500 uppercase tracking-widest ml-1">Your Name</label>
                     <input 
                       type="text" 
+                      name="name"
                       placeholder="John Doe"
                       className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/30 focus:bg-white/[0.08] transition-all duration-300"
                     />
@@ -85,6 +119,7 @@ export default function Contact() {
                     <label className="text-xs font-bold text-neutral-500 uppercase tracking-widest ml-1">Your Email</label>
                     <input 
                       type="email" 
+                      name="email"
                       placeholder="john@example.com"
                       className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/30 focus:bg-white/[0.08] transition-all duration-300"
                     />
@@ -95,6 +130,7 @@ export default function Contact() {
                   <label className="text-xs font-bold text-neutral-500 uppercase tracking-widest ml-1">Subject</label>
                   <input 
                     type="text" 
+                    name="subject"
                     placeholder="Project Inquiry"
                     className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/30 focus:bg-white/[0.08] transition-all duration-300"
                   />
@@ -103,14 +139,19 @@ export default function Contact() {
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-neutral-500 uppercase tracking-widest ml-1">Message</label>
                   <textarea 
+                    name="message"
                     rows={4}
                     placeholder="Tell me about your project..."
                     className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/30 focus:bg-white/[0.08] transition-all duration-300 resize-none"
                   />
                 </div>
 
-                <button className="w-full py-5 rounded-2xl bg-white text-black font-bold flex items-center justify-center gap-3 hover:bg-neutral-200 transition-all duration-300 group shadow-[0_10px_40px_rgba(255,255,255,0.05)]">
-                  <span>Send Message</span>
+                <button
+                  type="submit"
+                  disabled={isSending}
+                  className="w-full py-5 rounded-2xl bg-white text-black font-bold flex items-center justify-center gap-3 hover:bg-neutral-200 transition-all duration-300 group shadow-[0_10px_40px_rgba(255,255,255,0.05)]"
+                >
+                  <span>{isSending ? "Sending..." : "Send Message"}</span>
                   <Send className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </button>
               </form>

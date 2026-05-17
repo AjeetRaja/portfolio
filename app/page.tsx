@@ -134,9 +134,29 @@ export default function Home() {
             <div className="flex gap-12">
               <div className="flex flex-col gap-4">
                 <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest">Social</p>
-                <a href="https://x.com/rajahajay21" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">X.com</a>
-                <a href="https://www.linkedin.com/in/ajeet-kumar-4124752b3/" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">LinkedIn</a>
-                <a href="https://github.com/AjeetRaja/portfolio" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">GitHub</a>
+                <a href="https://x.com/rajahajay21" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-neutral-500 hover:text-white transition-colors">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-current">
+                    <path d="M19 5L9 15M9 9L19 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M5 5L15 15M15 9L5 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  X.com
+                </a>
+                <a href="https://www.linkedin.com/in/ajeet-kumar-4124752b3/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-neutral-500 hover:text-white transition-colors">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-current">
+                    <rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M8 10.5V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <path d="M8 8.5H8.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <path d="M12.5 17V12.5C12.5 11.3954 13.3954 10.5 14.5 10.5H15.5C16.6046 10.5 17.5 11.3954 17.5 12.5V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <path d="M8 17H11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                  LinkedIn
+                </a>
+                <a href="https://github.com/AjeetRaja/portfolio" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-neutral-500 hover:text-white transition-colors">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-current">
+                    <path d="M12 2C7.589 2 4 5.589 4 10C4 13.688 6.219 16.781 9.297 17.891C9.797 17.969 10.031 17.656 10.031 17.391C10.031 17.156 10.016 16.438 10.008 15.453C7 16.016 6.266 14.266 6.266 14.266C5.781 13.078 5.047 12.75 5.047 12.75C4.031 12.109 5.094 12.125 5.094 12.125C6.188 12.203 6.75 13.266 6.75 13.266C7.719 15.063 9.375 14.594 10.031 14.313C10.109 13.594 10.391 13.078 10.719 12.797C8.25 12.516 5.672 11.656 5.672 8.047C5.672 7.094 6 6.344 6.625 5.766C6.547 5.484 6.25 4.641 6.703 3.328C6.703 3.328 7.438 3.031 10.016 4.641C10.734 4.422 11.484 4.313 12.234 4.313C12.984 4.313 13.734 4.422 14.453 4.641C17.031 3.031 17.766 3.328 17.766 3.328C18.219 4.641 17.922 5.484 17.844 5.766C18.469 6.344 18.797 7.094 18.797 8.047C18.797 11.672 16.203 12.516 13.734 12.797C14.172 13.172 14.578 13.953 14.578 15.203C14.578 17.047 14.563 18.469 14.563 18.922C14.563 19.188 14.797 19.516 15.297 19.422C18.391 18.281 20.578 15.188 20.578 10C20.578 5.589 16.984 2 12 2Z" fill="currentColor"/>
+                  </svg>
+                  GitHub
+                </a>
               </div>
             </div>
           </div>
